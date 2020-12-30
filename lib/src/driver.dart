@@ -183,6 +183,12 @@ class Driver {
 
           preAnalyze(surveyorContext, subDir: dir != root);
 
+          print("Priming analysis context");
+          for (var filePath in context.contextRoot.analyzedFiles()) {
+            print(filePath);
+            await context.currentSession.getUnitElement(filePath);
+          }
+
           for (var filePath in context.contextRoot.analyzedFiles()) {
             if (AnalysisEngine.isDartFileName(filePath)) {
               try {
